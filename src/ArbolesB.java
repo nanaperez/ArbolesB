@@ -5,6 +5,9 @@
  * Time: 10:29 AM
  * To change this template use File | Settings | File Templates.
  */
+import java.awt.*;
+import javax.swing.*;
+
 public class ArbolesB {
 
     public static void main(String  [] misArgumentos) {
