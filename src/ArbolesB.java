@@ -12,6 +12,6 @@ public class ArbolesB {
 
     public static void main(String  [] misArgumentos) {
         System.out.println("ArbolesB - Estructura de datos y Algoritmos I");
-        System.out.println("Hola");
+
     }
 }
