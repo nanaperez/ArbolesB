@@ -71,13 +71,24 @@ public class ProcesosArbolesBTest {
     }
 
     @Test
-    public void testInsertarSubdividiendoArbol() throws Exception {
+     public void testInsertarSubdividiendoArbol() throws Exception {
         boolean Ins = ParbB.Insertar(0, 15);
         boolean Ins2 = ParbB.Insertar(1, 21);
         boolean Ins3 = ParbB.Insertar(2, 24);
         boolean Ins4 = ParbB.Insertar(3, 45);
         boolean Ins5 = ParbB.Insertar(4, 60);
         assertTrue(Ins5);
+    }
+
+    @Test
+    public void testInsertarSeisEnArbolOrdenDos() throws Exception {
+        boolean Ins = ParbB.Insertar(0, 15);
+        boolean Ins2 = ParbB.Insertar(1, 21);
+        boolean Ins3 = ParbB.Insertar(2, 24);
+        boolean Ins4 = ParbB.Insertar(3, 45);
+        boolean Ins5 = ParbB.Insertar(4, 60);
+        boolean Ins6 = ParbB.Insertar(5, 72);
+        assertTrue(Ins6);
     }
 
 }

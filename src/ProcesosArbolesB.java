@@ -29,13 +29,8 @@ public class ProcesosArbolesB {
 
             HojasDer.add(Temp.get(3));
             HojasDer.add(Temp.get(4));
-
-            //nuevo nodo para guardar los mayores
-            //En hojas quedan los menores.
-            //Nuevo nodo para el padre.
             Temp.clear();
         }
-
 
     return true;
     }
