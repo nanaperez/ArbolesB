@@ -27,13 +27,13 @@ public class InterfazArbolesB extends JFrame {
         setLayout(new BorderLayout());
 
         panelOrden = new PanelOrden();
-        this.add(panelOrden, BorderLayout.NORTH);
+        //this.add(panelOrden, BorderLayout.NORTH);
 
         panelNumeros = new PanelNumeros();
-        this.add(panelNumeros, BorderLayout.WEST);
+        //this.add(panelNumeros, BorderLayout.WEST);
 
         panelArbolCreado = new PanelArbolCreado();
-        this.add(panelArbolCreado, BorderLayout.CENTER);
+        //this.add(panelArbolCreado, BorderLayout.CENTER);
     }
 
     public static void main(String  [] misArgumentos) {

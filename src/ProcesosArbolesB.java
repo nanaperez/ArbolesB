@@ -10,32 +10,47 @@ import java.util.ArrayList;
 public class ProcesosArbolesB {
 
     ArrayList ArbolB = new ArrayList();
-    protected int ordenarbol;
+    ArrayList Raiz = new ArrayList();
+    ArrayList HojasIzq = new ArrayList();
+    ArrayList HojasDer = new ArrayList();
+    ArrayList Temp = new ArrayList();
+    protected int ordenarbol = 2;
 
-    protected boolean Insertar(int pos, String Valor){
-        try{
-            ArbolB.add(pos,Valor);
-        }catch (ArrayStoreException e){
+    protected boolean Insertar(int pos, int Valor){
+        //boolean ins = ArbolB.add(Valor);
+        if(Temp.size() < ordenarbol*2){
+            Temp.add(pos,Valor);
+        }else{
+            Temp.add(pos,Valor);
+            Raiz.add(Temp.get(ordenarbol));
 
+            HojasIzq.add(Temp.get(0));
+            HojasIzq.add(Temp.get(1));
+
+            HojasDer.add(Temp.get(3));
+            HojasDer.add(Temp.get(4));
+
+            //nuevo nodo para guardar los mayores
+            //En hojas quedan los menores.
+            //Nuevo nodo para el padre.
+            Temp.clear();
         }
-        return true;
+
+
+    return true;
     }
 
-    private boolean Borrar(int pos){
-        try{
+    //protected boolean Borrar(int pos){
+        //try{
+            //ArbolB.remove(pos);
+            //}catch (ArrayStoreException e){
 
-        }catch (ArrayStoreException e){
+            //}
+        //return true;
+    //}
 
-        }
-        return true;
-    }
-
-    private boolean Buscar(int pos){
-        try{
-
-        }catch (ArrayStoreException e){
-
-        }
-        return true;
-    }
+    //protected ArrayList Buscar(int pos){
+        //ArrayList pp = (ArrayList) ArbolB.get(pos);
+        //return pp;
+    //}
 }
