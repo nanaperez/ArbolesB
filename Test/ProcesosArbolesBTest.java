@@ -2,6 +2,8 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -27,68 +29,111 @@ public class ProcesosArbolesBTest {
         System.out.println("Hoja Izquierda: " + ParbB.HojasIzq);
         System.out.println("Hoja Derecha: " + ParbB.HojasDer);
         System.out.println("Temporal: " + ParbB.Temp);
+
+        ParbB.Raiz.clear();
+        ParbB.HojasIzq.clear();
+        ParbB.HojasDer.clear();
+        ParbB.Temp.clear();
         System.out.println();
     }
 
     @Test
      public void testInsertarUnoEnArbolOrdenDos() throws Exception {
-        boolean Ins = ParbB.Insertar(0, 15);
-        assertTrue(Ins);
+        System.out.println("testInsertarUnoEnArbolOrdenDos");
+        ParbB.Insertar(15);
+        assertEquals(15,ParbB.Temp.get(0));
+
     }
 
     @Test
     public void testInsertarDosEnArbolOrdenDos() throws Exception {
-        boolean Ins = ParbB.Insertar(0, 15);
-        boolean Ins2 = ParbB.Insertar(1, 21);
-        assertTrue(Ins2);
+        System.out.println("testInsertarDosEnArbolOrdenDos");
+        ParbB.Insertar(15);
+        ParbB.Insertar(21);
+        assertEquals(21,ParbB.Temp.get(1));
     }
 
     @Test
      public void testInsertarTresEnArbolOrdenDos() throws Exception {
-        boolean Ins = ParbB.Insertar(0, 15);
-        boolean Ins2 = ParbB.Insertar(1, 21);
-        boolean Ins3 = ParbB.Insertar(2, 45);
-        assertTrue(Ins3);
+        System.out.println("testInsertarTresEnArbolOrdenDos");
+        ParbB.Insertar(15);
+        ParbB.Insertar(21);
+        ParbB.Insertar(45);
+        assertEquals(45,ParbB.Temp.get(2));
     }
 
     @Test
     public void testInsertarCuatroEnArbolOrdenDos() throws Exception {
-        boolean Ins = ParbB.Insertar(0, 15);
-        boolean Ins2 = ParbB.Insertar(1, 21);
-        boolean Ins3 = ParbB.Insertar(2, 45);
-        boolean Ins4 = ParbB.Insertar(3, 60);
-        assertTrue(Ins4);
+        System.out.println("testInsertarCuatroEnArbolOrdenDos");
+        ParbB.Insertar(15);
+        ParbB.Insertar(21);
+        ParbB.Insertar(45);
+        ParbB.Insertar(60);
+        assertEquals(60,ParbB.Temp.get(3));
     }
 
     @Test
     public void testInsertarCincoEnArbolOrdenDos() throws Exception {
-        boolean Ins = ParbB.Insertar(0, 15);
-        boolean Ins2 = ParbB.Insertar(1, 21);
-        boolean Ins3 = ParbB.Insertar(2, 45);
-        boolean Ins4 = ParbB.Insertar(3, 60);
-        boolean Ins5 = ParbB.Insertar(4, 24);
-        assertTrue(Ins5);
+        System.out.println("testInsertarCincoEnArbolOrdenDos");
+        ParbB.Insertar(15);
+        ParbB.Insertar(21);
+        ParbB.Insertar(24);
+        ParbB.Insertar(45);
+        ParbB.Insertar(60);
+        assertEquals(24,ParbB.Raiz.get(0));
+        assertEquals(15,ParbB.HojasIzq.get(0));
+        assertEquals(21,ParbB.HojasIzq.get(1));
+        assertEquals(45,ParbB.HojasDer.get(0));
+        assertEquals(60,ParbB.HojasDer.get(1));
     }
 
     @Test
-     public void testInsertarSubdividiendoArbol() throws Exception {
-        boolean Ins = ParbB.Insertar(0, 15);
-        boolean Ins2 = ParbB.Insertar(1, 21);
-        boolean Ins3 = ParbB.Insertar(2, 24);
-        boolean Ins4 = ParbB.Insertar(3, 45);
-        boolean Ins5 = ParbB.Insertar(4, 60);
-        assertTrue(Ins5);
+     public void testInsertarUnoEnArbolOrdenDosDesorden() throws Exception {
+        System.out.println("testInsertarUnoEnArbolOrdenDosDesorden");
+        ParbB.Insertar(24);
+        assertEquals(24,ParbB.Temp.get(0));
     }
 
     @Test
-    public void testInsertarSeisEnArbolOrdenDos() throws Exception {
-        boolean Ins = ParbB.Insertar(0, 15);
-        boolean Ins2 = ParbB.Insertar(1, 21);
-        boolean Ins3 = ParbB.Insertar(2, 24);
-        boolean Ins4 = ParbB.Insertar(3, 45);
-        boolean Ins5 = ParbB.Insertar(4, 60);
-        boolean Ins6 = ParbB.Insertar(5, 72);
-        assertTrue(Ins6);
+    public void testInsertarDosEnArbolOrdenDosDesorden() throws Exception {
+        System.out.println("testInsertarDosEnArbolOrdenDosDesorden");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        assertEquals(60,ParbB.Temp.get(1));
+    }
+
+    @Test
+    public void testInsertarTresEnArbolOrdenDosDesorden() throws Exception {
+        System.out.println("testInsertarTresEnArbolOrdenDosDesorden");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        ParbB.Insertar(21);
+        assertEquals(60,ParbB.Temp.get(2));
+    }
+
+    @Test
+    public void testInsertarCuatroEnArbolOrdenDosDesorden() throws Exception {
+        System.out.println("testInsertarCuatroEnArbolOrdenDosDesorden");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        ParbB.Insertar(21);
+        ParbB.Insertar(15);
+        assertEquals(60,ParbB.Temp.get(3));
+    }
+
+    @Test
+    public void testInsertarCincoEnArbolOrdenDosDesorden() throws Exception {
+        System.out.println("testInsertarCincoEnArbolOrdenDosDesorden");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        ParbB.Insertar(21);
+        ParbB.Insertar(15);
+        ParbB.Insertar(45);
+        assertEquals(24,ParbB.Raiz.get(0));
+        assertEquals(15,ParbB.HojasIzq.get(0));
+        assertEquals(21,ParbB.HojasIzq.get(1));
+        assertEquals(45,ParbB.HojasDer.get(0));
+        assertEquals(60,ParbB.HojasDer.get(1));
     }
 
 }

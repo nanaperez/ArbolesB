@@ -16,12 +16,12 @@ public class ProcesosArbolesB {
     ArrayList Temp = new ArrayList();
     protected int ordenarbol = 2;
 
-    protected boolean Insertar(int pos, int Valor){
-        //boolean ins = ArbolB.add(Valor);
+    protected void Insertar(int Valor){
+        int Pos = ObtenerPosicion(Valor);
         if(Temp.size() < ordenarbol*2){
-            Temp.add(pos,Valor);
+            Temp.add(Pos,Valor);
         }else{
-            Temp.add(pos,Valor);
+            Temp.add(Pos,Valor);
             Raiz.add(Temp.get(ordenarbol));
 
             HojasIzq.add(Temp.get(0));
@@ -31,8 +31,22 @@ public class ProcesosArbolesB {
             HojasDer.add(Temp.get(4));
             Temp.clear();
         }
+    }
 
-    return true;
+    protected int ObtenerPosicion(int valor) {
+        int tam = Temp.size();
+        int i = 0;
+        if(tam != 0){
+            while(i < tam){
+                int valarray = Integer.parseInt(Temp.get(i).toString());
+                if(valor < valarray){
+                    return i;
+                }
+                i++;
+            }
+            return i++;
+        }
+        return 0;
     }
 
     //protected boolean Borrar(int pos){
