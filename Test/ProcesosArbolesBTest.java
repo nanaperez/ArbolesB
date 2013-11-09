@@ -29,6 +29,7 @@ public class ProcesosArbolesBTest {
         System.out.println("Hoja Izquierda: " + ParbB.HojasIzq);
         System.out.println("Hoja Derecha: " + ParbB.HojasDer);
         System.out.println("Temporal: " + ParbB.Temp);
+        System.out.println("Cantidad nodos: " + ParbB.contadornodos);
 
         ParbB.Raiz.clear();
         ParbB.HojasIzq.clear();
@@ -122,7 +123,7 @@ public class ProcesosArbolesBTest {
     }
 
     @Test
-    public void testInsertarCincoEnArbolOrdenDosDesorden() throws Exception {
+     public void testInsertarCincoEnArbolOrdenDosDesorden() throws Exception {
         System.out.println("testInsertarCincoEnArbolOrdenDosDesorden");
         ParbB.Insertar(24);
         ParbB.Insertar(60);
@@ -134,6 +135,106 @@ public class ProcesosArbolesBTest {
         assertEquals(21,ParbB.HojasIzq.get(1));
         assertEquals(45,ParbB.HojasDer.get(0));
         assertEquals(60,ParbB.HojasDer.get(1));
+    }
+
+    @Test
+    public void testInsertarSeisEnArbolOrdenDosDesordenInsertarArbolIzquierdo() throws Exception {
+        System.out.println("testInsertarSeisEnArbolOrdenDosDesordenInsertarArbolIzquierdo");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        ParbB.Insertar(21);
+        ParbB.Insertar(15);
+        ParbB.Insertar(45);
+        ParbB.Insertar(22);
+        assertEquals(24,ParbB.Raiz.get(0));
+        assertEquals(15,ParbB.HojasIzq.get(0));
+        assertEquals(21,ParbB.HojasIzq.get(1));
+        assertEquals(22,ParbB.HojasIzq.get(2));
+        assertEquals(45,ParbB.HojasDer.get(0));
+        assertEquals(60,ParbB.HojasDer.get(1));
+    }
+
+    @Test
+     public void testInsertarSieteEnArbolOrdenDosDesordenInsertarArbolIzquierdo() throws Exception {
+        System.out.println("testInsertarSieteEnArbolOrdenDosDesordenInsertarArbolIzquierdo");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        ParbB.Insertar(21);
+        ParbB.Insertar(15);
+        ParbB.Insertar(45);
+        ParbB.Insertar(22);
+        ParbB.Insertar(17);
+        assertEquals(24,ParbB.Raiz.get(0));
+        assertEquals(15,ParbB.HojasIzq.get(0));
+        assertEquals(17,ParbB.HojasIzq.get(1));
+        assertEquals(21,ParbB.HojasIzq.get(2));
+        assertEquals(22,ParbB.HojasIzq.get(3));
+        assertEquals(45,ParbB.HojasDer.get(0));
+        assertEquals(60,ParbB.HojasDer.get(1));
+    }
+
+    @Test
+    public void testInsertarSeisEnArbolOrdenDosDesordenInsertarArbolDerecho() throws Exception {
+        System.out.println("testInsertarSeisEnArbolOrdenDosDesordenInsertarArbolDerecho");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        ParbB.Insertar(21);
+        ParbB.Insertar(15);
+        ParbB.Insertar(45);
+        ParbB.Insertar(61);
+        assertEquals(24,ParbB.Raiz.get(0));
+        assertEquals(15,ParbB.HojasIzq.get(0));
+        assertEquals(21,ParbB.HojasIzq.get(1));
+        assertEquals(45,ParbB.HojasDer.get(0));
+        assertEquals(60,ParbB.HojasDer.get(1));
+        assertEquals(61,ParbB.HojasDer.get(2));
+    }
+
+    @Test
+    public void testInsertarOchoEnArbolOrdenDosDesordenInsertarArbolDerechoIzquierdo() throws Exception {
+        System.out.println("testInsertarSieteEnArbolOrdenDosDesordenInsertarArbolDerecho");
+        ParbB.Insertar(24);
+        ParbB.Insertar(60);
+        ParbB.Insertar(21);
+        ParbB.Insertar(15);
+        ParbB.Insertar(45);
+        ParbB.Insertar(22);
+        ParbB.Insertar(61);
+        ParbB.Insertar(30);
+        ParbB.Insertar(23);
+        assertEquals(24,ParbB.Raiz.get(0));
+        assertEquals(15,ParbB.HojasIzq.get(0));
+        assertEquals(21,ParbB.HojasIzq.get(1));
+        assertEquals(22,ParbB.HojasIzq.get(2));
+        assertEquals(23,ParbB.HojasIzq.get(3));
+        assertEquals(30,ParbB.HojasDer.get(0));
+        assertEquals(45,ParbB.HojasDer.get(1));
+        assertEquals(60,ParbB.HojasDer.get(2));
+        assertEquals(61,ParbB.HojasDer.get(3));
+    }
+
+    @Test
+    public void testInsertarOchoEnArbolOrdenDosOrdenAscendenteInsertarArbolDerechoIzquierdo() throws Exception {
+        System.out.println("testInsertarOchoEnArbolOrdenDosOrdenAscendenteInsertarArbolDerechoIzquierdo");
+        ParbB.Insertar(1);
+        ParbB.Insertar(2);
+        ParbB.Insertar(3);
+        ParbB.Insertar(4);
+        ParbB.Insertar(5);
+        ParbB.Insertar(6);
+        ParbB.Insertar(7);
+        ParbB.Insertar(8);
+        ParbB.Insertar(9);
+        assertEquals(3,ParbB.Raiz.get(0));
+        assertEquals(6,ParbB.Raiz.get(1));
+        assertEquals(1,ParbB.HojasIzq.get(0));
+        assertEquals(2,ParbB.HojasIzq.get(1));
+        //assertEquals(22,ParbB.HojasIzq.get(2));
+        //assertEquals(23,ParbB.HojasIzq.get(3));
+        assertEquals(4,ParbB.HojasDer.get(0));
+        assertEquals(5,ParbB.HojasDer.get(1));
+        //assertEquals(60,ParbB.HojasDer.get(2));
+        //assertEquals(61,ParbB.HojasDer.get(3));
     }
 
 }

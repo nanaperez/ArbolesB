@@ -15,36 +15,69 @@ public class ProcesosArbolesB {
     ArrayList HojasDer = new ArrayList();
     ArrayList Temp = new ArrayList();
     protected int ordenarbol = 2;
+    protected int contadornodos = 1;
 
     protected void Insertar(int Valor){
-        int Pos = ObtenerPosicion(Valor);
-        if(Temp.size() < ordenarbol*2){
+        int Pos = ObtenerPosicion(Valor,contadornodos);
+        if(Temp.size() < ordenarbol*2 && contadornodos == 1){
             Temp.add(Pos,Valor);
         }else{
-            Temp.add(Pos,Valor);
-            Raiz.add(Temp.get(ordenarbol));
+            if(contadornodos == 3){
+                if(Valor < Integer.parseInt(Raiz.get(0).toString())){
+                    HojasIzq.add(Pos,Valor);
+                }else{
+                    HojasDer.add(Pos,Valor);
+                }
+            }else{
+                Temp.add(Pos,Valor);
+                Raiz.add(Temp.get(ordenarbol));
 
-            HojasIzq.add(Temp.get(0));
-            HojasIzq.add(Temp.get(1));
-
-            HojasDer.add(Temp.get(3));
-            HojasDer.add(Temp.get(4));
-            Temp.clear();
+                for(int hizq = 0; hizq < ordenarbol;hizq++){
+                    HojasIzq.add(Temp.get(hizq));
+                }
+                for(int hder = ordenarbol+1; hder <= 2*ordenarbol;hder++){
+                    HojasDer.add(Temp.get(hder));
+                }
+                Temp.clear();
+                contadornodos = 3;
+            }
         }
     }
 
-    protected int ObtenerPosicion(int valor) {
-        int tam = Temp.size();
+    protected int ObtenerPosicion(int valor, int contnod) {
+        int tam;
+        boolean der = true;
+        if(contnod == 1){
+        tam = Temp.size();
+        }else{
+            if(valor < Integer.parseInt(Raiz.get(0).toString())){
+                tam = HojasIzq.size();
+                der = false;
+            }else{
+                tam = HojasDer.size();
+            }
+
+        }
         int i = 0;
         if(tam != 0){
             while(i < tam){
-                int valarray = Integer.parseInt(Temp.get(i).toString());
+                int valarray;
+                if(contnod == 1){
+                    valarray = Integer.parseInt(Temp.get(i).toString());
+                }else{
+                    if(der){
+                        valarray = Integer.parseInt(HojasDer.get(i).toString());
+                    }else{
+                        valarray = Integer.parseInt(HojasIzq.get(i).toString());
+                    }
+
+                }
                 if(valor < valarray){
                     return i;
                 }
                 i++;
             }
-            return i++;
+            return i;
         }
         return 0;
     }
