@@ -23,7 +23,7 @@ public class ArbolesB extends JFrame {
         insertar(ParbB);
 
         JPanel pt = new JPanel();
-        lblTituloArbol = new JLabel("Arbol:");
+        lblTituloArbol = new JLabel("Arbol");
         pt.add(lblTituloArbol);
 
         this.setTitle("ArbolB - Estructra de datos y algoritmos 1");

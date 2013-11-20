@@ -57,10 +57,7 @@ public class ProcesosArbolesB {
                 arbolstring += "\n ";
                 saltolinea =  nod.getNivel();
             }
-            arbolstring += nod.getValoresNodos().toString();
-            System.out.println(nod.getOrden()+" orden");
-            System.out.println(nod.getNivel()+" nivel");
-            System.out.print(nod.getValoresNodos()+"\n ");
+            arbolstring += "  -"+nod.getValoresNodos().toString()+"-  ";
         }
         return arbolstring;
     }
