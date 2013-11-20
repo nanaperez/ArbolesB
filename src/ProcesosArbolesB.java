@@ -38,7 +38,7 @@ public class ProcesosArbolesB {
     public void setOrdenarbol(int ordenarbol) {
         this.ordenarbol = ordenarbol;
     }
-
+              //niv.getNivel();
     public Nodo getNodo() {
         return nodo;
     }
@@ -50,7 +50,7 @@ public class ProcesosArbolesB {
     public String imprimirarbol(ProcesosArbolesB arbol){
         String arbolstring = "";
         ArrayList<Nodo> niv = arbol.recorrer();
-        int saltolinea = 0;//niv.getNivel();
+        int saltolinea = 0;
         for(Nodo nod : niv){
 
             if(nod.getNivel() != saltolinea){
@@ -58,6 +58,8 @@ public class ProcesosArbolesB {
                 saltolinea =  nod.getNivel();
             }
             arbolstring += nod.getValoresNodos().toString();
+            System.out.println(nod.getOrden()+" orden");
+            System.out.println(nod.getNivel()+" nivel");
             System.out.print(nod.getValoresNodos()+"\n ");
         }
         return arbolstring;
@@ -71,7 +73,7 @@ public class ProcesosArbolesB {
         while (!cola.isEmpty()){
             Nodo nod = cola.poll();
             for (Nodo hijo: nod.getSubNodos()){
-                hijo.setNivel(nod.getOrden() + 1);
+                hijo.setNivel(nod.getNivel() + 1);
                 sale.add(hijo);
                 cola.add(hijo);
             }

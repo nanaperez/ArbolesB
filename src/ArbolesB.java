@@ -8,31 +8,35 @@
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.util.ArrayList;
 
 public class ArbolesB extends JFrame {
 
-    public ArbolesB(){
+    public ArbolesB() throws BadLocationException {
 
         String orden = JOptionPane.showInputDialog("Definir Orden: ").trim();
         ProcesosArbolesB ParbB = new ProcesosArbolesB(Integer.parseInt(orden));
         insertar(ParbB);
 
-
+        JPanel pt = new JPanel();
+        lblTituloArbol = new JLabel("Arbol:");
+        pt.add(lblTituloArbol);
 
         this.setTitle("ArbolB - Estructra de datos y algoritmos 1");
         Dimension Dm = new Dimension(800,600);
         this.setSize(Dm);
         this.setVisible(true);
         this.toFront();
-        //this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        //this.add(ContenidoArbol(),BorderLayout.CENTER);
-        this.add(FormularioArbol(),BorderLayout.SOUTH);
+        this.add(pt,BorderLayout.NORTH);
         this.add(ContenidoArbol(ParbB),BorderLayout.CENTER);
-        //;
+        this.add(FormularioArbol(),BorderLayout.SOUTH);
 
     }
 
@@ -47,18 +51,23 @@ public class ArbolesB extends JFrame {
     }
 
     private JLabel lblTituloArbol;
-    private JLabel lblArbolito;
-    private JTextArea TAreaPrueba;
 
-    public JPanel ContenidoArbol(ProcesosArbolesB PB){
+    public JPanel ContenidoArbol(ProcesosArbolesB PB) throws BadLocationException {
         String arB = PB.imprimirarbol(PB);
-        lblTituloArbol = new JLabel("Arbol: \n");
-        lblArbolito = new JLabel(arB);
-        TAreaPrueba = new JTextArea(arB,20,20);
+
+        JTextPane editor = new JTextPane();
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        int centrar = StyleConstants.ALIGN_CENTER;
+        editor.getStyledDocument().insertString(editor.getStyledDocument().getLength(), arB, attrs);
+
+        StyledDocument st=editor.getStyledDocument();
+        SimpleAttributeSet bSet = new SimpleAttributeSet();
+        StyleConstants.setAlignment(bSet, centrar);
+        st.setParagraphAttributes(0,editor.getText().length(), bSet, false);
+        editor.updateUI();
+
         JPanel Ca = new JPanel();
-        Ca.add(lblTituloArbol);
-        Ca.add(lblArbolito);
-        Ca.add(TAreaPrueba);
+        Ca.add(editor);
         return Ca;
     }
 
@@ -79,7 +88,7 @@ public class ArbolesB extends JFrame {
         return Fa;
     }
 
-    public static void main(String  [] misArgumentos) {
+    public static void main(String  [] misArgumentos) throws BadLocationException {
         ArbolesB AB = new ArbolesB();
     }
 
