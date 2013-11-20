@@ -6,80 +6,77 @@
  * To change this template use File | Settings | File Templates.
  */
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ProcesosArbolesB {
 
-    ArrayList ArbolB = new ArrayList();
-    ArrayList Raiz = new ArrayList();
-    ArrayList HojasIzq = new ArrayList();
-    ArrayList HojasDer = new ArrayList();
-    ArrayList Temp = new ArrayList();
-    protected int ordenarbol = 2;
-    protected int contadornodos = 1;
+    private int ordenarbol;
+    private ArrayList<Integer> ArbolB;//Guarda los valores que se van ingresando.
+    private Nodo nodo;//Almacena la información necesaria para crear el arbolB
+    protected int contadornodos = 1;//Me indica la cantidad de nodos en el ArbolB
+
+    public ProcesosArbolesB(int orden){
+        setOrdenarbol(orden);//Me indica en que orden es el arbolB.
+        setNodo(new Nodo(orden,true));//Instancia el primer nodo como raiz.
+        ArbolB = new ArrayList<Integer>();//Se crea lista para almacenar los valores que se ingresan al arbolB
+    }
 
     protected void Insertar(int Valor){
-        int Pos = ObtenerPosicion(Valor,contadornodos);
-        if(Temp.size() < ordenarbol*2 && contadornodos == 1){
-            Temp.add(Pos,Valor);
-        }else{
-            if(contadornodos == 3){
-                if(Valor < Integer.parseInt(Raiz.get(0).toString())){
-                    HojasIzq.add(Pos,Valor);
-                }else{
-                    HojasDer.add(Pos,Valor);
-                }
-            }else{
-                Temp.add(Pos,Valor);
-                Raiz.add(Temp.get(ordenarbol));
-
-                for(int hizq = 0; hizq < ordenarbol;hizq++){
-                    HojasIzq.add(Temp.get(hizq));
-                }
-                for(int hder = ordenarbol+1; hder <= 2*ordenarbol;hder++){
-                    HojasDer.add(Temp.get(hder));
-                }
-                Temp.clear();
-                contadornodos = 3;
-            }
+        ArbolB.add(Valor);//Se ingresa el valor a la lista con los valores del ArbolB
+        SubNodo sn = nodo.insertar(Valor);//Se ejecuta el metodo insertar del objeto NODO para retornar un subnodo.
+        if(sn != null){
+            Nodo nuevonodo = new Nodo(ordenarbol,sn);
+            this.nodo = nuevonodo;
         }
     }
 
-    protected int ObtenerPosicion(int valor, int contnod) {
-        int tam;
-        boolean der = true;
-        if(contnod == 1){
-        tam = Temp.size();
-        }else{
-            if(valor < Integer.parseInt(Raiz.get(0).toString())){
-                tam = HojasIzq.size();
-                der = false;
-            }else{
-                tam = HojasDer.size();
-            }
+    public int getOrdenarbol() {
+        return ordenarbol;
+    }
 
-        }
-        int i = 0;
-        if(tam != 0){
-            while(i < tam){
-                int valarray;
-                if(contnod == 1){
-                    valarray = Integer.parseInt(Temp.get(i).toString());
-                }else{
-                    if(der){
-                        valarray = Integer.parseInt(HojasDer.get(i).toString());
-                    }else{
-                        valarray = Integer.parseInt(HojasIzq.get(i).toString());
-                    }
+    public void setOrdenarbol(int ordenarbol) {
+        this.ordenarbol = ordenarbol;
+    }
 
-                }
-                if(valor < valarray){
-                    return i;
-                }
-                i++;
+    public Nodo getNodo() {
+        return nodo;
+    }
+
+    public void setNodo(Nodo nodo) {
+        this.nodo = nodo;
+    }
+
+    public String imprimirarbol(ProcesosArbolesB arbol){
+        String arbolstring = "";
+        ArrayList<Nodo> niv = arbol.recorrer();
+        int saltolinea = 0;//niv.getNivel();
+        for(Nodo nod : niv){
+
+            if(nod.getNivel() != saltolinea){
+                arbolstring += "\n ";
+                saltolinea =  nod.getNivel();
             }
-            return i;
+            arbolstring += nod.getValoresNodos().toString();
+            System.out.print(nod.getValoresNodos()+"\n ");
         }
-        return 0;
+        return arbolstring;
+    }
+
+    public ArrayList<Nodo> recorrer(){
+        Queue<Nodo> cola = new LinkedList<Nodo>();
+        ArrayList <Nodo> sale = new ArrayList<Nodo>();
+        sale.add(nodo);
+        cola.add(nodo);
+        while (!cola.isEmpty()){
+            Nodo nod = cola.poll();
+            for (Nodo hijo: nod.getSubNodos()){
+                hijo.setNivel(nod.getOrden() + 1);
+                sale.add(hijo);
+                cola.add(hijo);
+            }
+        }
+        return sale;
     }
 
     //protected boolean Borrar(int pos){

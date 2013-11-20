@@ -16,11 +16,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class ProcesosArbolesBTest {
 
-    ProcesosArbolesB ParbB = new ProcesosArbolesB();
-
+    //ProcesosArbolesB ParbB = new ProcesosArbolesB();
+     /*
     @Before
     public void setUp() throws Exception {
-        ParbB.ordenarbol = 2;
+        //ParbB.ordenarbol = 2;
     }
 
     @After
@@ -236,7 +236,7 @@ public class ProcesosArbolesBTest {
         //assertEquals(60,ParbB.HojasDer.get(2));
         //assertEquals(61,ParbB.HojasDer.get(3));
     }
-
+    */
 }
 
 
