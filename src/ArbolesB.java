@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -14,7 +16,10 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.util.ArrayList;
 
-public class ArbolesB extends JFrame {
+public class ArbolesB extends JFrame implements ActionListener {
+
+    public final static String BUSCAR = "Buscar";
+    public final static String ELIMINAR = "Eliminar";
 
     public ArbolesB() throws BadLocationException {
 
@@ -81,11 +86,26 @@ public class ArbolesB extends JFrame {
         txtBuscarEliminar = new JTextField(15);
         btnEliminar = new JButton("Eliminar");
 
+        btnBuscar.setActionCommand(BUSCAR);
+        btnBuscar.addActionListener(this);
+        btnEliminar.setActionCommand(ELIMINAR);
+        btnEliminar.addActionListener(this);
+
         JPanel Fa = new JPanel();
         Fa.add(btnBuscar);
         Fa.add(txtBuscarEliminar);
         Fa.add(btnEliminar);
         return Fa;
+    }
+
+    //@Override
+    public void actionPerformed(ActionEvent e) {
+        String comando = e.getActionCommand();
+        if(comando.equals(BUSCAR)) {
+            JOptionPane.showConfirmDialog(null,"Estas buscando??");
+        }else{
+            JOptionPane.showConfirmDialog(null,"Estas eliminando!!");
+        }
     }
 
     public static void main(String  [] misArgumentos) throws BadLocationException {
