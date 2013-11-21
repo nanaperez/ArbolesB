@@ -96,8 +96,7 @@ public class ProcesosArbolesB {
         }
     }
 
-    //protected ArrayList Buscar(int pos){
-        //ArrayList pp = (ArrayList) ArbolB.get(pos);
-        //return pp;
-    //}
+    public Nodo buscar(int valor){
+        return nodo.buscarnodo(valor);
+    }
 }

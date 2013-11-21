@@ -110,28 +110,47 @@ public class ArbolesB extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         String comando = actionEvent.getActionCommand();
         if(comando.equals(BUSCAR)) {
-
+            buscar();
         }else {
-            String strValor = txtBuscarEliminar.getText().trim();
-            txtBuscarEliminar.setText("");
-            int valor = Integer.parseInt(strValor);
-            String del = ParbB.eliminar(valor);
-            txtBuscarEliminar.requestFocus();
-            editor.setText("");
-            String arB = ParbB.imprimirarbol(ParbB);
-            SimpleAttributeSet attrs = new SimpleAttributeSet();
-            int centrar = StyleConstants.ALIGN_CENTER;
-            try {
-                editor.getStyledDocument().insertString(editor.getStyledDocument().getLength(), arB, attrs);
-            } catch (BadLocationException e) {
-                e.printStackTrace();
-            }
-            StyledDocument st=editor.getStyledDocument();
-            SimpleAttributeSet bSet = new SimpleAttributeSet();
-            StyleConstants.setAlignment(bSet, centrar);
-            st.setParagraphAttributes(0,editor.getText().length(), bSet, false);
-            editor.repaint();
-            editor.updateUI();
+            eliminar();
         }
+    }
+
+    public void eliminar(){
+        String strValor = txtBuscarEliminar.getText().trim();
+        txtBuscarEliminar.setText("");
+        int valor = Integer.parseInt(strValor);
+        String del = ParbB.eliminar(valor);
+        txtBuscarEliminar.requestFocus();
+        editor.setText("");
+        String arB = ParbB.imprimirarbol(ParbB);
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        int centrar = StyleConstants.ALIGN_CENTER;
+        try {
+            editor.getStyledDocument().insertString(editor.getStyledDocument().getLength(), arB, attrs);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+        StyledDocument st=editor.getStyledDocument();
+        SimpleAttributeSet bSet = new SimpleAttributeSet();
+        StyleConstants.setAlignment(bSet, centrar);
+        st.setParagraphAttributes(0,editor.getText().length(), bSet, false);
+        editor.repaint();
+        editor.updateUI();
+    }
+
+
+
+    public void buscar(){
+        String strValor = txtBuscarEliminar.getText().trim();
+        txtBuscarEliminar.setText("");
+        int valor = Integer.parseInt(strValor);
+        Nodo nd = ParbB.buscar(valor);
+        if(nd != null){
+            JOptionPane.showConfirmDialog(null,"El número "+valor+" se encuentra en el nivel: "+nd.getNivel());
+        }else{
+            JOptionPane.showConfirmDialog(null,"Valor NO encontrado");
+        }
+        txtBuscarEliminar.requestFocus();
     }
 }

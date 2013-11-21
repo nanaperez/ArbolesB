@@ -163,4 +163,22 @@ public class Nodo {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+
+    public Nodo buscarnodo(int valor){
+        if(valoresNodo.contains(valor)){
+            return this;
+        }else{
+            if(hoja){
+                return null;
+            }else{
+                int i = 0;
+                while (i < valoresNodo.size() && valor > valoresNodo.get(i)) {
+                    i++;
+                }
+                return SubNodos.get(i).buscarnodo(valor);
+            }
+        }
+    }
+
+
 }
