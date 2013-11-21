@@ -78,14 +78,23 @@ public class ProcesosArbolesB {
         return sale;
     }
 
-    //protected boolean Borrar(int pos){
-        //try{
-            //ArbolB.remove(pos);
-            //}catch (ArrayStoreException e){
-
-            //}
-        //return true;
-    //}
+    protected String eliminar(int valor){
+        if(ArbolB.contains(valor)){
+            Nodo nuevonodo = new Nodo(ordenarbol,true);
+            SubNodo Subn;
+            ArbolB.remove(valor);
+            for (Integer integer : ArbolB) {
+                Subn = nuevonodo.insertar(integer);
+                if(Subn != null){
+                    nuevonodo = Subn.toRaiz();
+                }
+            }
+            nodo = nuevonodo;
+            return "El #"+valor+" esta eliminado.";
+        }else{
+            return "Elemento no registrado.";
+        }
+    }
 
     //protected ArrayList Buscar(int pos){
         //ArrayList pp = (ArrayList) ArbolB.get(pos);

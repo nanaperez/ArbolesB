@@ -39,4 +39,9 @@ public class SubNodo {
     public void setHd(Nodo hd) {
         this.hd = hd;
     }
+
+    public Nodo toRaiz(){
+        Nodo nodo = new Nodo(getHd().getOrden(), this);
+        return nodo;
+    }
 }

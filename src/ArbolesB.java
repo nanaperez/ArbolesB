@@ -20,11 +20,12 @@ public class ArbolesB extends JFrame implements ActionListener {
 
     public final static String BUSCAR = "Buscar";
     public final static String ELIMINAR = "Eliminar";
+    ProcesosArbolesB ParbB;
 
     public ArbolesB() throws BadLocationException {
 
         String orden = JOptionPane.showInputDialog("Definir Orden: ").trim();
-        ProcesosArbolesB ParbB = new ProcesosArbolesB(Integer.parseInt(orden));
+        ParbB = new ProcesosArbolesB(Integer.parseInt(orden));
         insertar(ParbB);
 
         JPanel pt = new JPanel();
@@ -56,11 +57,12 @@ public class ArbolesB extends JFrame implements ActionListener {
     }
 
     private JLabel lblTituloArbol;
+    JTextPane editor;
 
     public JPanel ContenidoArbol(ProcesosArbolesB PB) throws BadLocationException {
         String arB = PB.imprimirarbol(PB);
 
-        JTextPane editor = new JTextPane();
+        editor = new JTextPane();
         SimpleAttributeSet attrs = new SimpleAttributeSet();
         int centrar = StyleConstants.ALIGN_CENTER;
         editor.getStyledDocument().insertString(editor.getStyledDocument().getLength(), arB, attrs);
@@ -88,6 +90,7 @@ public class ArbolesB extends JFrame implements ActionListener {
 
         btnBuscar.setActionCommand(BUSCAR);
         btnBuscar.addActionListener(this);
+
         btnEliminar.setActionCommand(ELIMINAR);
         btnEliminar.addActionListener(this);
 
@@ -98,19 +101,37 @@ public class ArbolesB extends JFrame implements ActionListener {
         return Fa;
     }
 
-    //@Override
-    public void actionPerformed(ActionEvent e) {
-        String comando = e.getActionCommand();
-        if(comando.equals(BUSCAR)) {
-            JOptionPane.showConfirmDialog(null,"Estas buscando??");
-        }else{
-            JOptionPane.showConfirmDialog(null,"Estas eliminando!!");
-        }
-    }
-
     public static void main(String  [] misArgumentos) throws BadLocationException {
         ArbolesB AB = new ArbolesB();
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        String comando = actionEvent.getActionCommand();
+        if(comando.equals(BUSCAR)) {
+
+        }else {
+            String strValor = txtBuscarEliminar.getText().trim();
+            txtBuscarEliminar.setText("");
+            int valor = Integer.parseInt(strValor);
+            String del = ParbB.eliminar(valor);
+            txtBuscarEliminar.requestFocus();
+            editor.setText("");
+            String arB = ParbB.imprimirarbol(ParbB);
+            SimpleAttributeSet attrs = new SimpleAttributeSet();
+            int centrar = StyleConstants.ALIGN_CENTER;
+            try {
+                editor.getStyledDocument().insertString(editor.getStyledDocument().getLength(), arB, attrs);
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+            StyledDocument st=editor.getStyledDocument();
+            SimpleAttributeSet bSet = new SimpleAttributeSet();
+            StyleConstants.setAlignment(bSet, centrar);
+            st.setParagraphAttributes(0,editor.getText().length(), bSet, false);
+            editor.repaint();
+            editor.updateUI();
+        }
+    }
 }
