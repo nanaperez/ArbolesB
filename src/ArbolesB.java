@@ -122,6 +122,7 @@ public class ArbolesB extends JFrame implements ActionListener {
         int valor = Integer.parseInt(strValor);
         String del = ParbB.eliminar(valor);
         txtBuscarEliminar.requestFocus();
+
         editor.setText("");
         String arB = ParbB.imprimirarbol(ParbB);
         SimpleAttributeSet attrs = new SimpleAttributeSet();

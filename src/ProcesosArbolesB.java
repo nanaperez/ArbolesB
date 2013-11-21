@@ -82,7 +82,8 @@ public class ProcesosArbolesB {
         if(ArbolB.contains(valor)){
             Nodo nuevonodo = new Nodo(ordenarbol,true);
             SubNodo Subn;
-            ArbolB.remove(valor);
+            Integer eliminado = new Integer(valor);
+            ArbolB.remove(eliminado);
             for (Integer integer : ArbolB) {
                 Subn = nuevonodo.insertar(integer);
                 if(Subn != null){
