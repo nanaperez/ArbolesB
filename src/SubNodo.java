@@ -1,10 +1,4 @@
-/**
- * Created with IntelliJ IDEA.
- * User: jessecogollo
- * Date: 18/11/13
- * Time: 11:22 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class SubNodo {
     private int valor;
     private Nodo hi;

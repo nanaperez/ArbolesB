@@ -1,10 +1,4 @@
-/**
- * Created with IntelliJ IDEA.
- * User: jessecogollo
- * Date: 2/11/13
- * Time: 10:29 AM
- * To change this template use File | Settings | File Templates.
- */
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,26 +8,26 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.util.ArrayList;
 
 public class ArbolesB extends JFrame implements ActionListener {
 
+    public final static String INSERTAR = "Insertar";
     public final static String BUSCAR = "Buscar";
     public final static String ELIMINAR = "Eliminar";
     ProcesosArbolesB ParbB;
 
     public ArbolesB() throws BadLocationException {
 
-        String orden = JOptionPane.showInputDialog("Definir Orden: ").trim();
+        String orden = JOptionPane.showInputDialog("Defina el Orden: ").trim();
         ParbB = new ProcesosArbolesB(Integer.parseInt(orden));
-        insertar(ParbB);
+        //insertar(ParbB);
 
         JPanel pt = new JPanel();
         lblTituloArbol = new JLabel("Arbol");
         pt.add(lblTituloArbol);
 
-        this.setTitle("ArbolB - Estructra de datos y algoritmos 1");
-        Dimension Dm = new Dimension(800,600);
+        this.setTitle("ArbolB - Estructuras de datos y algoritmos I");
+        Dimension Dm = new Dimension(750,600);
         this.setSize(Dm);
         this.setVisible(true);
         this.toFront();
@@ -43,23 +37,43 @@ public class ArbolesB extends JFrame implements ActionListener {
         this.add(pt,BorderLayout.NORTH);
         this.add(ContenidoArbol(ParbB),BorderLayout.CENTER);
         this.add(FormularioArbol(),BorderLayout.SOUTH);
-
     }
 
     public void insertar(ProcesosArbolesB PB){
 
-        int respuesta = JOptionPane.showConfirmDialog(null,"Desea ingresar valores?","titulo",JOptionPane.YES_NO_OPTION);
-        while (respuesta == 0){//0 para si
-            String valor = JOptionPane.showInputDialog("Ingrese Elemento:");
-            PB.Insertar(Integer.parseInt(valor));
-            respuesta = JOptionPane.showConfirmDialog(null,"Desea seguir ingresando valores?","Continuar",JOptionPane.YES_NO_OPTION);
+        //int respuesta = JOptionPane.showConfirmDialog(null,"Desea ingresar valores?","Ingreso de valores",JOptionPane.YES_NO_OPTION);
+        //while (respuesta == 0){//0 para si
+        String strValor =  txtBuscarEliminar.getText().trim();
+        int valor = Integer.parseInt(strValor);
+        PB.Insertar(valor);
+
+        txtBuscarEliminar.setText("");
+
+        //String del = ParbB.eliminar(valor);
+        txtBuscarEliminar.requestFocus();
+
+        editor.setText("");
+        String arB = ParbB.imprimirarbol(ParbB);
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        int centrar = StyleConstants.ALIGN_CENTER;
+        try {
+            editor.getStyledDocument().insertString(editor.getStyledDocument().getLength(), arB, attrs);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
         }
+        StyledDocument st=editor.getStyledDocument();
+        SimpleAttributeSet bSet = new SimpleAttributeSet();
+        StyleConstants.setAlignment(bSet, centrar);
+        st.setParagraphAttributes(0,editor.getText().length(), bSet, false);
+        editor.repaint();
+        editor.updateUI();
     }
 
     private JLabel lblTituloArbol;
     JTextPane editor;
 
     public JPanel ContenidoArbol(ProcesosArbolesB PB) throws BadLocationException {
+
         String arB = PB.imprimirarbol(PB);
 
         editor = new JTextPane();
@@ -67,7 +81,7 @@ public class ArbolesB extends JFrame implements ActionListener {
         int centrar = StyleConstants.ALIGN_CENTER;
         editor.getStyledDocument().insertString(editor.getStyledDocument().getLength(), arB, attrs);
 
-        StyledDocument st=editor.getStyledDocument();
+        StyledDocument st = editor.getStyledDocument();
         SimpleAttributeSet bSet = new SimpleAttributeSet();
         StyleConstants.setAlignment(bSet, centrar);
         st.setParagraphAttributes(0,editor.getText().length(), bSet, false);
@@ -79,14 +93,19 @@ public class ArbolesB extends JFrame implements ActionListener {
     }
 
     private JTextField txtBuscarEliminar;
+    private JButton btnInsertar;
     private JButton btnBuscar;
     private JButton btnEliminar;
 
     public JPanel FormularioArbol(){
 
+        btnInsertar = new JButton("Insertar");
         btnBuscar = new JButton("Buscar");
         txtBuscarEliminar = new JTextField(15);
         btnEliminar = new JButton("Eliminar");
+
+        btnInsertar.setActionCommand(INSERTAR);
+        btnInsertar.addActionListener(this);
 
         btnBuscar.setActionCommand(BUSCAR);
         btnBuscar.addActionListener(this);
@@ -95,6 +114,7 @@ public class ArbolesB extends JFrame implements ActionListener {
         btnEliminar.addActionListener(this);
 
         JPanel Fa = new JPanel();
+        Fa.add(btnInsertar);
         Fa.add(btnBuscar);
         Fa.add(txtBuscarEliminar);
         Fa.add(btnEliminar);
@@ -111,12 +131,16 @@ public class ArbolesB extends JFrame implements ActionListener {
         String comando = actionEvent.getActionCommand();
         if(comando.equals(BUSCAR)) {
             buscar();
-        }else {
+        }
+        else if (comando.equals(ELIMINAR)) {
             eliminar();
+        }
+        else {
+            insertar(ParbB);
         }
     }
 
-    public void eliminar(){
+    public void eliminar() {
         String strValor = txtBuscarEliminar.getText().trim();
         txtBuscarEliminar.setText("");
         int valor = Integer.parseInt(strValor);
@@ -140,16 +164,15 @@ public class ArbolesB extends JFrame implements ActionListener {
         editor.updateUI();
     }
 
-
-
-    public void buscar(){
+    public void buscar() {
         String strValor = txtBuscarEliminar.getText().trim();
         txtBuscarEliminar.setText("");
         int valor = Integer.parseInt(strValor);
         Nodo nd = ParbB.buscar(valor);
         if(nd != null){
             JOptionPane.showConfirmDialog(null,"El número "+valor+" se encuentra en el nivel: "+nd.getNivel());
-        }else{
+        }
+        else{
             JOptionPane.showConfirmDialog(null,"Valor NO encontrado");
         }
         txtBuscarEliminar.requestFocus();

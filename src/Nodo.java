@@ -1,12 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jessecogollo
- * Date: 18/11/13
- * Time: 10:39 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Nodo {
     private int orden;
     private boolean hoja;
